@@ -1,26 +1,74 @@
 
 import 'package:flutter/material.dart';
 
-const int itemCount = 20;
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({ Key? key }) : super(key: key);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String istapped = '';
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: itemCount,
-      itemBuilder: (
-        BuildContext context, 
-        int index){
-      return  ListTile(
-        title: Text('Item ${(index + 1)}'),
-        leading: const Icon(Icons.person),
-        trailing: const Icon(Icons.select_all),
-        onTap: (){
-          debugPrint('Item ${(index + 1)} selected');
-        },
-      );
-    },);
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Learn Flutter'),
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ), 
+        ), 
+        
+        body: Padding(  
+            padding: const EdgeInsets.all(15),  
+            child: Column(  
+              children: <Widget>[  
+                const Padding(  
+                  padding: EdgeInsets.all(15),  
+                  child: TextField(  
+                    decoration: InputDecoration(  
+                      border: OutlineInputBorder(),  
+                      labelText: 'User Name',  
+                      hintText: 'Enter Your Name',  
+                    ),  
+                  ),  
+                ),  
+                const Padding(  
+                  padding: EdgeInsets.all(15),  
+                  child: TextField(  
+                    obscureText: true,  
+                    decoration: InputDecoration(  
+                      border: OutlineInputBorder(),  
+                      labelText: 'Password',  
+                      hintText: 'Enter Password',  
+                    ),  
+                  ),  
+                ),
+                ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.all(20)),
+                    textStyle: MaterialStateProperty.all(
+                        const TextStyle(fontSize: 14, color: Colors.white))),
+                onPressed: () {
+                  setState(() {
+                    istapped = 'Button tapped';
+                  });
+                },
+                child: const Text('Enabled Button')),  
+               
+              ],  
+            )  
+        )  
+    ); 
+     
   }
+  //void setState(Null Function() param0) {}
 }
